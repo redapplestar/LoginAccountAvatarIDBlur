@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "Login Account Avatar & ID Blur",
+  "short_name": "Account Blur",
+  "version": "1.1.0",
+  "description": "クラウドワークス・ランサーズ・ココナラ・Workana で、ログイン中のアカウントのアバターとID/ユーザー名だけにぼかしをかけます。DeepL 翻訳のダークモード表示にも対応。",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Account Blur",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.crowdworks.jp/*",
+        "*://*.lancers.jp/*",
+        "*://*.coconala.com/*",
+        "*://*.workana.com/*"
+      ],
+      "js": ["src/sites.js", "src/content.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": ["*://www.deepl.com/*translator*"],
+      "js": ["src/sites.js", "src/deepl-dark.js"],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ]
+}

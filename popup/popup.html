@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Account Blur</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Account Blur</h1>
+    <label class="switch" title="ぼかしの ON/OFF">
+      <input type="checkbox" id="enabled">
+      <span class="slider"></span>
+    </label>
+  </header>
+
+  <section class="card">
+    <div class="row">
+      <label for="blurPx">ぼかしの強さ</label>
+      <span id="blurPxValue" class="muted"></span>
+    </div>
+    <input type="range" id="blurPx" min="2" max="20" step="1">
+    <label class="check">
+      <input type="checkbox" id="autoLearn">
+      ヘッダーから自分のアバター・ID を自動検出する
+    </label>
+    <label class="check">
+      <input type="checkbox" id="deeplDark">
+      DeepL 翻訳（deepl.com/translator）をダークモードにする
+    </label>
+  </section>
+
+  <section id="siteSection" class="card" hidden>
+    <div class="row">
+      <h2 id="siteLabel"></h2>
+      <button id="detectBtn" class="link" title="このページのヘッダーから再検出">再検出</button>
+    </div>
+
+    <button id="pickBtn" class="primary">要素を選択してぼかす</button>
+    <p class="hint">自動検出で漏れたアバターや ID/名前を、ページ上でクリックして登録できます。</p>
+
+    <h3>アバター画像</h3>
+    <ul id="avatarList" class="chips avatars"></ul>
+
+    <h3>ID / ユーザー名</h3>
+    <ul id="nameList" class="chips"></ul>
+
+    <form id="addForm" class="add">
+      <input id="addInput" type="text" placeholder="ID・名前、または画像URLを追加" autocomplete="off">
+      <button type="submit">追加</button>
+    </form>
+
+    <button id="resetBtn" class="danger link">このサイトの登録をすべて削除</button>
+  </section>
+
+  <section id="notSupported" class="card muted" hidden>
+    このタブは対象サイトではありません。<br>
+    対象: crowdworks.jp / lancers.jp / coconala.com / workana.com<br>
+    （DeepL 翻訳のダークモードは上の設定で切り替えられます）
+  </section>
+
+  <script src="../src/sites.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
